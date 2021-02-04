@@ -4,19 +4,21 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const validateObjectId = require('../middleware/validateObjectId');
 const { validate, User } = require('../model/user');
+const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 
-router.get('/', async (req, res) => {
+router.get('/', [auth, admin], async (req, res) => {
     res.send(await User.find().sort('name'));
 });
 
-router.get('/:id', validateObjectId, async (req, res) => {
+router.get('/:id', [auth, admin, validateObjectId], async (req, res) => {
     const user = await User.findById(req.params.id);
     if (!user) return res.status(404).send("The user with the given ID does not exist"); //404
     
     res.send(user);
 })
 
-router.post('/', async (req, res) => {
+router.post('/', [auth, admin], async (req, res) => {
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -36,7 +38,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', validateObjectId, async (req, res) => {
+router.put('/:id', [auth, admin, validateObjectId], async (req, res) => {
 
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -53,7 +55,7 @@ router.put('/:id', validateObjectId, async (req, res) => {
     res.send(user);
 });
 
-router.delete('/:id', validateObjectId, async (req, res) => {
+router.delete('/:id', [auth, admin, validateObjectId], async (req, res) => {
 
     const user = await User.findByIdAndDelete(req.params.id);
     

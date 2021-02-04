@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Appartment, validate } = require('../model/appartment');
 const auth = require('../middleware/auth');
+const admin = require('../middleware/admin');
 const validateobjectId = require('../middleware/validateObjectId');
 
 router.get('/', async (req, res) => {
@@ -15,7 +16,7 @@ router.get('/:id', validateobjectId, async (req, res) => {
     res.send(appartment);
 });
 
-router.post('/', auth,  async (req, res) => {
+router.post('/', [auth, admin],  async (req, res) => {
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
@@ -41,7 +42,7 @@ router.post('/', auth,  async (req, res) => {
     }
 });
 
-router.put('/:id', [auth, validateobjectId], async (req, res) => {
+router.put('/:id', [auth, admin, validateobjectId], async (req, res) => {
 
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -65,7 +66,7 @@ router.put('/:id', [auth, validateobjectId], async (req, res) => {
     res.send(appartment);
 });
 
-router.delete('/:id', [auth, validateobjectId], async (req, res) => {
+router.delete('/:id', [auth, admin, validateobjectId], async (req, res) => {
 
     const appartment = await Appartment.findByIdAndDelete(req.params.id);
     
