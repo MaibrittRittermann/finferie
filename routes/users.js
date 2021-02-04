@@ -43,10 +43,13 @@ router.put('/:id', [auth, admin, validateObjectId], async (req, res) => {
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
 
+    const salt = await bcrypt.genSalt(10);
+    const password = await bcrypt.hash(req.body.password, salt);
+
     const user = await User.findByIdAndUpdate(req.params.id, {
         name: req.body.name,
         email: req.body.email,
-        password: req.body.password,
+        password: password,
         isAdmin: req.body.isAdmin
     }, {new : true});
 

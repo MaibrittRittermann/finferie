@@ -1,0 +1,9 @@
+{"message":"listening on port 3010","level":"info","service":"user-service"}
+{"message":"Connected to DB mongodb+srv://admin:vin10lAlle@finferie.gm1eg.mongodb.net/finferie?retryWrites=true&w=majority","level":"info","service":"user-service"}
+{"message":"listening on port 3010","level":"info","service":"user-service"}
+{"message":"Connected to DB mongodb+srv://admin:vin10lAlle@finferie.gm1eg.mongodb.net/finferie?retryWrites=true&w=majority","level":"info","service":"user-service"}
+{"service":"user-service","level":"error","message":"Cannot access 'user' before initialization Cannot access 'user' before initialization","stack":"ReferenceError: Cannot access 'user' before initialization\n    at C:\\dev\\Node_js\\finferie\\routes\\users.js:47:40"}
+{"message":"listening on port 3010","level":"info","service":"user-service"}
+{"message":"Connected to DB mongodb+srv://admin:vin10lAlle@finferie.gm1eg.mongodb.net/finferie?retryWrites=true&w=majority","level":"info","service":"user-service"}
+{"message":"listening on port 3010","level":"info","service":"user-service"}
+{"message":"Connected to DB mongodb+srv://admin:vin10lAlle@finferie.gm1eg.mongodb.net/finferie?retryWrites=true&w=majority","level":"info","service":"user-service"}
