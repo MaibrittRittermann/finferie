@@ -82,18 +82,13 @@ router.put('/:id', [auth, validateObjectId], async(req, res) => {
     if (overlap.length !== 0) 
         return res.status(400).send('Appartment allready booked in this time period');
     
-
-    const booking = new Booking({
-        appartment: {
-            _id: appartmentDB._id,
-            name: appartmentDB.name
-        },
-        customer: customer._id,
-        tennents: req.body.tennents,
-        dateFrom: rentDateFrom,
-        dateTo: rentDateTo,
-        price: req.body.price
-    });
+    booking.appartment._id=appartmentDB._id;
+    booking.appartment.name=appartmentDB.name;
+    booking.customer=customer._id;
+    booking.tennents=req.body.tennents;
+    booking.dateFrom=rentDateFrom;
+    booking.dateTo=rentDateTo;
+    booking.price=req.body.price;
     await booking.save();
 
     res.send(booking);  
