@@ -28,7 +28,9 @@ router.post('/', auth,  async (req, res) => {
         city: req.body.city,
         images: req.body.images,
         bullets: req.body.bullets,
-        hotelbullets: req.body.hotelbullets
+        hotelbullets: req.body.hotelbullets,
+        highSeasonPrice: req.body.highSeasonPrice,
+        lowSeasonPrice: req.body.lowSeasonPrice
      }); 
 
     try {
@@ -53,7 +55,9 @@ router.put('/:id', [auth, validateobjectId], async (req, res) => {
         city: req.body.city,
         images: req.body.images,
         bullets: req.body.bullets,
-        hotelbullets: req.body.hotelbullets
+        hotelbullets: req.body.hotelbullets,
+        highSeasonPrice: req.body.highSeasonPrice,
+        lowSeasonPrice: req.body.lowSeasonPrice
     }, {new : true});
 
     if(!appartment) return res.status(404).send('The appartment with the given ID does not exist');

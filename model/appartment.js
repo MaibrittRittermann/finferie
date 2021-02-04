@@ -39,7 +39,9 @@ const appartmentSchema = mongoose.Schema({
         required: true
     }],
     bullets : [String],
-    hotelBullets : [String]
+    hotelBullets : [String],
+    highSeasonPrice: Number,
+    lowSeasonPrice: Number
 });
 
 const Appartment = mongoose.model('Appartment', appartmentSchema);
@@ -54,7 +56,9 @@ function validate(appartment) {
         zip: Joi.number().min(100).max(100000).required(),
         images: Joi.array().items(Joi.string().min(5).max(50)),
         bullets: Joi.array().items(Joi.string()),
-        hotelBullets: Joi.array().items(Joi.string())
+        hotelBullets: Joi.array().items(Joi.string()),
+        highSeasonPrice: Joi.Number(),
+        lowSeasonPrice: Joi.Number()
     });
     return schema.validate(appartment);
 }

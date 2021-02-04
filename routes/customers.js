@@ -4,11 +4,11 @@ const validateobjectId = require('../middleware/validateObjectId');
 const {Customer, validate } = require('../model/customer');
 const auth = require('../middleware/auth');
 
-router.get('/', async (req, res) => {
+router.get('/', [auth, admin], async (req, res) => {
     res.send(await Customer.find().sort('name'));
 });
 
-router.get('/:id', validateobjectId, async (req, res) => {
+router.get('/:id', auth, validateobjectId, async (req, res) => {
     const customer = await Customer.findById(req.params.id);
     if (!customer) return res.status(404).send("The customer with the given ID does not exist"); 
     res.send(customer);
@@ -38,7 +38,7 @@ router.post('/',  async (req, res) => {
     }
 });
 
-router.put('/:id', validateobjectId, async (req, res) => {
+router.put('/:id', [auth, validateobjectId], async (req, res) => {
 
     const {error} = validate(req.body);
     if(error) return res.status(400).send(error.details[0].message);
@@ -57,7 +57,7 @@ router.put('/:id', validateobjectId, async (req, res) => {
     res.send(customer);
 });
 
-router.delete('/:id', validateobjectId, async (req, res) => {
+router.delete('/:id', [auth, validateobjectId], async (req, res) => {
 
     const customer = await Customer.findByIdAndDelete(req.params.id);
     
