@@ -1,10 +1,10 @@
 const request = require('supertest');
-const { User } = require('../../model/user');
+const { User } = require('../../../model/user');
 let server;
 
 describe('/api/users', () => {
     beforeEach(() => {
-        server = require('../../index');
+        server = require('../../../index');
     });
     afterEach(async () => {
         server.close();

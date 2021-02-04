@@ -1,13 +1,13 @@
 const request = require('supertest');
-const Customers = require('../../routes/customers');
-const { Customer } = require('../../model/customer');
-const { User } = require('../../model/user');
+const Customers = require('../../../routes/customers');
+const { Customer } = require('../../../model/customer');
+const { User } = require('../../../model/user');
 const { expectCt } = require('helmet');
 let server;
 
 describe('/api/customers', () => {
     beforeEach(() => {
-        server = require('../../index');
+        server = require('../../../index');
     });
     afterEach(async() => {
         server.close();
@@ -40,12 +40,6 @@ describe('/api/customers', () => {
         })
     });
     describe('POST /', () => {
-        it('should return 401 if client is not logged in',async () => {
-            const res = await request(server)
-                .post('/api/customers')
-                .send({name: "n", phone: "1", email: "e", address: "a", zip: "1", city: "b" });
-            expect(res.status).toBe(401);
-        });
         it('should return 400 if customer is invalid', async () => {
             const token = new User().generateAuthToken();
             const res = await request(server)

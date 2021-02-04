@@ -17,7 +17,7 @@ const customerSchema = mongoose.Schema({
     email: {
         type: String,
         required: true,
-        minlength: 8,
+        minlength: 6,
         maxlength: 255
     },
     address: {
@@ -27,10 +27,10 @@ const customerSchema = mongoose.Schema({
         maxlength: 255
     },
     zip: {
-        type: String,
+        type: Number,
         required: true,
-        minlength: 4,
-        maxlength: 6
+        min: 1000,
+        max: 99999
     },
     city: {
         type: String,
@@ -38,7 +38,7 @@ const customerSchema = mongoose.Schema({
         minlength: 2,
         maxlength: 255
     }
-})
+});
 
 const Customer = mongoose.model('Customer', customerSchema);
 
@@ -46,9 +46,9 @@ function validateCustomer(customer) {
     const schema = Joi.object({
         name: Joi.string().min(5).max(255).required(),
         phone: Joi.string().min(8).max(12).regex(/^\d+$/).required(),
-        email: Joi.string().min(8).max(225).required(),
+        email: Joi.string().email().min(6).max(225).required(),
         address: Joi.string().min(8).max(225).required(),
-        zip: Joi.string().min(4).max(6).regex(/^\d+$/).required(),
+        zip: Joi.number().min(1000).max(99999).required(),
         city: Joi.string().min(2).max(255).required()
     });
     return schema.validate(customer);

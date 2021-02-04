@@ -1,4 +1,5 @@
 {
-    "jwtPrivateKey" : "ff_jwtPrivateKey"
+    "jwtPrivateKey" : "ff_jwtPrivateKey",
+    "connectionString" : "connectionString"
     
 }

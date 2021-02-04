@@ -5,6 +5,7 @@ require('./startup/config')();
 require('./startup/validate');
 require('./startup/db');
 require('./startup/routes')(app);
+require('./startup/prod')(app);
 
 const port = process.env.PORT || 3000;
 const server = app.listen(port, () => logger.info(`listening on port ${port}`));
