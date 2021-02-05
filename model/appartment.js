@@ -57,8 +57,8 @@ function validate(appartment) {
         images: Joi.array().items(Joi.string().min(5).max(50)),
         bullets: Joi.array().items(Joi.string()),
         hotelBullets: Joi.array().items(Joi.string()),
-        highSeasonPrice: Joi.Number(),
-        lowSeasonPrice: Joi.Number()
+        highSeasonPrice: Joi.number(),
+        lowSeasonPrice: Joi.number()
     });
     return schema.validate(appartment);
 }
