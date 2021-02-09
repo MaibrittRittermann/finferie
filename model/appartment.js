@@ -34,6 +34,10 @@ const appartmentSchema = mongoose.Schema({
         type: String,
         maxlength: 255
     },
+    country: {
+        type: String,
+        maxlength: 255
+    },
     images : [{
         type: String,
         required: true
@@ -54,6 +58,7 @@ function validate(appartment) {
         address: Joi.string().max(255).required(),
         city: Joi.string().max(255).required(),
         zip: Joi.number().min(100).max(100000).required(),
+        country: Joi.string().max(255),
         images: Joi.array().items(Joi.string().min(5).max(50)),
         bullets: Joi.array().items(Joi.string()),
         hotelBullets: Joi.array().items(Joi.string()),
