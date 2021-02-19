@@ -4,7 +4,7 @@ const winston = require('winston');
 module.exports = function () {
     winston.exceptions.handle(
         new winston.transports.Console({colorize: true, prettyPrint: true}),
-        new winston.transports.File({filename:'unCaughtExceptions.log'})
+        new winston.transports.File({filename:'unCaughtExceptions.log', timestamp: true})
     );
 
     process.on('unhandledRejection', (ex) => {
