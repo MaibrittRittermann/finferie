@@ -3,19 +3,19 @@ const customers = require('../routes/customers');
 const appartments = require('../routes/appartments');
 const users = require('../routes/users');
 const auth = require('../routes/auth');
-const booking = require('../routes/bookings');
+const bookings = require('../routes/bookings');
+const reviews = require('../routes/reviews');
 const logger = require('../startup/logging')();
-const cors = require('cors');
 
 module.exports = function (app) {
 
-    app.use(cors());
     app.use(express.static('public'));
     app.use(express.json());
     app.use('/api/customers', customers);
     app.use('/api/users', users);
     app.use('/api/appartments', appartments);
-    app.use('/api/bookings', booking);
+    app.use('/api/bookings', bookings);
+    app.use('/api/appartments/reviews', reviews);
     app.use('/api/auth', auth);
 
     app.use(function(err, req, res, next) {

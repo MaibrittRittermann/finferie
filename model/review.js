@@ -1,7 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const { customerSchema } = require('./customer');
-const { appartmentSchema } = require('./appartment');
+const { number } = require('joi');
 
 const reviewSchema = mongoose.Schema({
     date: {
@@ -15,11 +14,17 @@ const reviewSchema = mongoose.Schema({
         minlength: 10
     },
     customer: {
-        type: customerSchema,
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'customer',
         required: true
     },
     appartment : {
-        type: appartmentSchema,
+        type : mongoose.Schema.Types.ObjectId,
+        ref: 'appartment',
+        required: true
+    },
+    stars : {
+        type: Number,
         required: true
     }
 });
@@ -31,7 +36,8 @@ function validate(review) {
         date: Joi.Date().required(),
         review: Joi.String().min(10). max(1000).required(),   
         customer: Joi.ObjectId().required(),
-        appartment: Joi.ObjectId().required()
+        appartment: Joi.ObjectId().required(),
+        stars: Joi.number().min(0).max(5).required()
     });
     return schema.validate(review);
 }
