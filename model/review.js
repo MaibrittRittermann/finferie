@@ -1,6 +1,5 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const { number } = require('joi');
 
 const reviewSchema = mongoose.Schema({
     date: {
@@ -33,10 +32,9 @@ const Review = mongoose.model('Review', reviewSchema);
 
 function validate(review) {
     const schema = Joi.object({
-        date: Joi.Date().required(),
-        review: Joi.String().min(10). max(1000).required(),   
-        customer: Joi.ObjectId().required(),
-        appartment: Joi.ObjectId().required(),
+        review: Joi.string().min(10). max(1000).required(),   
+        customer: Joi.objectId().required(),
+        appartment: Joi.objectId().required(),
         stars: Joi.number().min(0).max(5).required()
     });
     return schema.validate(review);

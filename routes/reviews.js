@@ -24,7 +24,7 @@ router.post('/', auth, async(req, res) => {
     const review = new Review({
         appartment: appartment._id,
         customer: customer._id,
-        date: new Date.now(),
+        date: new Date().getTime(),
         review: req.body.review,
         stars: req.body.stars    
     });
