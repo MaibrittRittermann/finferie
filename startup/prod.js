@@ -5,5 +5,19 @@ const cors = require('cors');
 module.exports = function (app) {
     app.use(helmet());
     app.use(compression());
-    app.use(cors());
+
+    const corsOpts = {
+        origin: '*',
+      
+        methods: [
+          'GET',
+          'POST',
+        ],
+      
+        allowedHeaders: [
+          'Content-Type',
+        ],
+    };
+      
+    app.use(cors(corsOpts));
 }
