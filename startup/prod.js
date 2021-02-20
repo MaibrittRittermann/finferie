@@ -14,20 +14,22 @@ module.exports = function (app) {
     //     next();
     // });
 
-    const corsOpts = {
-        origin: '*',
+    // const corsOpts = {
+    //     origin: '*',
       
-        methods: [
-          'GET',
-          'POST',
-          'PUT',
-          'DELETE'
-        ],
+    //     methods: [
+    //       'GET',
+    //       'POST',
+    //       'PUT',
+    //       'DELETE'
+    //     ],
       
-        allowedHeaders: [
-          'Content-Type',
-        ],
-    };
+    //     allowedHeaders: [
+    //       'Content-Type',
+    //     ],
+    // };
       
-    app.use(cors(corsOpts));
+    // app.use(cors(corsOpts));
+
+    app.use(cors());
 }
