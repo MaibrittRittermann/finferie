@@ -9,5 +9,5 @@ module.exports =
         useNewUrlParser: true,
         useCreateIndex: true
     })
-        .then(() => logger.info(`Connected to DB ${config.get('connectionString')}`))
+        .then(() => logger.info(`Connected to DB`))
         .catch(err => logger.error('DB Error: ', err.message));
